@@ -67,7 +67,7 @@ static PyMethodDef Methods[] = {
     {nullptr, nullptr, 0, nullptr}};
 
 static struct PyModuleDef module = {PyModuleDef_HEAD_INIT,
-                                    "cbench",
+                                    "ctest",
                                     nullptr,
                                     -1,
                                     Methods,
@@ -76,4 +76,6 @@ static struct PyModuleDef module = {PyModuleDef_HEAD_INIT,
                                     nullptr,
                                     nullptr};
 
-PyMODINIT_FUNC PyInit_cbench(void) { return PyModule_Create(&module); }
+PyMODINIT_FUNC PyInit_ctest(void) {
+  return PyModule_Create(&module);
+}
