@@ -8,16 +8,24 @@
 static PyObject *matrix_multiply_cublas(PyObject *self, PyObject *args) {
 
   PyObject *a, *b, *r;
-  if (!PyArg_ParseTuple(args, "OOO", &a, &b, &r))
+  if (!PyArg_ParseTuple(args, "OOO", &a, &b, &r)) {
+    PyErr_SetString(PyExc_TypeError, "couldn't parse");
     return nullptr;
+  }
 
   Py_buffer A, B, R;
-  if (PyObject_GetBuffer(a, &A, PyBUF_CONTIG))
+  if (PyObject_GetBuffer(a, &A, PyBUF_CONTIG)) {
+    PyErr_SetString(PyExc_TypeError, "A not contig");
     return nullptr;
-  if (PyObject_GetBuffer(b, &B, PyBUF_CONTIG))
+  }
+  if (PyObject_GetBuffer(b, &B, PyBUF_CONTIG)) {
+    PyErr_SetString(PyExc_TypeError, "B not contig");
     return nullptr;
-  if (PyObject_GetBuffer(r, &R, PyBUF_CONTIG))
+  }
+  if (PyObject_GetBuffer(r, &R, PyBUF_CONTIG)) {
+    PyErr_SetString(PyExc_TypeError, "R not contig");
     return nullptr;
+  }
   if (A.itemsize != sizeof(float) ||
       B.itemsize != sizeof(float) ||
       R.itemsize != sizeof(float)) {
