@@ -20,13 +20,15 @@ static PyObject *matrix_multiply_cublas(PyObject *self, PyObject *args) {
     return nullptr;
   if (A.itemsize != sizeof(float) ||
       B.itemsize != sizeof(float) ||
-      R.itemsize != sizeof(float))
+      R.itemsize != sizeof(float)) {
     PyErr_SetString(PyExc_TypeError, "expected float");
     return nullptr;
+  }
 
-  if (A.ndim != 2 || B.ndim != 2 || R.ndim != 2)
+  if (A.ndim != 2 || B.ndim != 2 || R.ndim != 2) {
     PyErr_SetString(PyExc_TypeError, "expected 2-dimensional array");
     return nullptr;
+  }
 
   cublasHandle_t handle; // CUBLAS context
 
